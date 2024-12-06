@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Jonas Mahler 12.2024
 
 # Description
@@ -15,7 +14,7 @@ compatible with Unreal.
 
 Rading and spawning the example mesh in the Content folder of the plugin looks as follows:
 
-![image](Resources/SpawnedMesh.PNG){width=250}
+![image](Resources/SpawnedMesh.PNG)
 
 # Build the plugin
 
@@ -37,7 +36,5 @@ projects plugin directory. Drag and drop the file into the world.
 
 If you are not able to see the mesh and receive a failed message,  
 first check if the right path to the mesh file is set. 
-=======
-# Assimp2UnrealExample
-Basic example to load and spawn a mesh in Unreal 5 using Assimp and Procedural Mesh Component
->>>>>>> 2c4608adc941a0eec03e61e88ab8733bd4b08624
+
+
