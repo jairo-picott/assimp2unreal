@@ -33,10 +33,34 @@ bool UImportMesh::OpenMesh(FString FilePath)
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Read file failed"));
 		return false;
 	}
-	// Each node stores the index to one or more meshes. Take the first one.
-	unsigned int SceneMeshIndex = Scene->mRootNode->mMeshes[0];
-	// Meshes are stored in an array in scene. Index is position in array.
-	aiMesh* Mesh = Scene->mMeshes[SceneMeshIndex];
+	
+	//// Each node stores the index to one or more meshes. Take the first one.
+	//unsigned int SceneMeshIndex = Scene->mRootNode->mMeshes[0];
+	//// Meshes are stored in an array in scene. Index is position in array.
+	//aiMesh* Mesh = Scene->mMeshes[SceneMeshIndex];
+
+	// Added by Jairo Basto Picott - Github @jairo-picott
+	// Ensure that the index in valid, and avoid Bug
+	// Iterate over all nodes to find the first valid mesh
+	aiMesh* Mesh = nullptr;
+
+	for (uint32 i = 0; i < Scene->mNumMeshes; i++)
+	{
+		if (Scene->mMeshes[i] != nullptr)
+		{
+			Mesh = Scene->mMeshes[i];
+			break;
+		}
+	}
+
+	// Check if we found a mesh
+	if (!Mesh)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Assimp: No valid meshes found in the OBJ file!"));
+		return false;
+	}
+	// END modification
+
 
 	// Take all entries of imported assimp mesh that have the same number as vertice entries, including vertices.
 	for (unsigned int i = 0; i < Mesh->mNumVertices; i++)
